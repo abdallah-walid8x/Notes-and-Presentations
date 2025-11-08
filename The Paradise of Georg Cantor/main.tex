@@ -1,0 +1,222 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb}
+\usepackage{xcolor, tikz}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\DeclareMathOperator*{\id}{id}
+
+\parindent=0mm
+\parskip=1.9mm
+\linespread{1.1}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\renewcommand{\restriction}{\mathord{\upharpoonright}}
+
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+\title{\textbf{The Paradise of Georg Cantor}}
+\author{Abdallah W. Mahmoud \\ ID: 900221058 \\ ~ \\ The American University in Cairo \\ Discrete Mathematics}
+\date{Spring 2024}
+
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+
+\begin{center}
+\textit{``No one will drive us from the paradise which Cantor created for us."}\\
+David Hilbert
+\end{center}
+
+\vspace{2cm}
+
+
+
+\textbf{Abstract.}
+
+ In this paper, we explore the life of Georg Cantor as well as his contributions to mathematics. We show his influence on set theory, the impact he had on future mathematicians, and the legacy that he left to all of us learners. We also explore the hardhsips he had to endure because of his work, and the sacrifices he had to make. Then finally, we provide the preliminaries and proof for his most famous theorem, named Cantor's theorem in his honor.
+
+\newpage
+
+\section{Cantor's Life}
+
+In this section we will present the life story of Georg Cantor based on the article ``\textit{The Nature of Infinity}" by Jørgen Veisdal \cite{Veisdal}. 
+\newline\newline Considered the father of set theory, Georg Cantor's work revolutionised modern mathematics and changed our understanding of what infinity really is. His bold claims about the nature of infinity were unprecedented in the history of mathematics, and were met with resentment by the leading minds of mathematics at that time. Cantor faced harsh adversity due to his work, as he spent his last years in a state of severe depression, eventually passing away due to a heart attack. Ironically enough, his work would be appreciated years after his death, stemming his legacy as one of the most influential mathematicians in history. This is the story of Georg Cantor.\newline  
+
+\textbf{Early life}
+\newline Cantor was born on 3 March, 1845 in Saint Petersburg in a family of 6 children to the Danish couple, G.W. Cantour and Marie Cantour. He was influenced by his father, who was a successful businessman. His aptitude for mathematics was noticeable when he was a child, which led his father to register him for private tutoring sessions. Cantor later attended a private school in Frankfurt, then studied at Höheren Gewerbschule for 2 years before transferring to ETH Zurich. He later transferred again to the University of Berlin after inheriting from his father who had just passed away from Tuberculosis. He was very proficient with the violin and was renowed in his family as an excellent violinist. After receiving a Ph.D. from the University of Berlin, he worked as a \textit{Privatdozent} at Halle University, where he would remain working until his death.\newline
+
+\textbf{Career}
+\newline During his days at the University of Berlin, Cantor garnered a positive reputation from his peers and professors as a "learned and clever" student. Among his professors were Ernst Kummer, Leopold Kronecker and Karl Weierstrass. His 1867 dissertation and 1869 habilitation focused on the solutions to Legendre's equation.\newline
+
+While working at Halle University in 1870, Cantor published his first paper "On a theorem concerning the trigonometric series", proving in it his theorem which we now call \textbf{Cantor's Uniqueness Theorem}: \textit{Every function $f:\mathbb{R \to R}$ can have at most one representation by a trigonometric series.} He then published another paper in 1972 called "On the generalization of a theorem from the
+theory of trigonometric series". This paper builds upon the 1870 paper, and in this paper Cantor provides what we now call \textbf{Cantor's Definition of real numbers $\mathbb{R}$}: \textit{A real number is an infinite series of rational numbers a_1,a_2,...,a_u,...$ such that for any given $\epsilon$ there exists a u₁ such that for u $\ge$ u_1$ and for any positive integer v, $|a_{u+v} - a_u|<\epsilon$.} This paper, which was one of Cantor's early works on real analysis, would inspire his future work on set theory.\newline 
+
+In 1874, Cantor published a paper "On a Property of the Collection of All Real Algebraic Numbers” which would serve as the foundation of set theory. Most importantly, he proved in this paper that the set of real numbers is uncountably infinite. Between 1873 and 1874, he published papers containing proofs of the countability of the set of rational numbers and the set of real algebraic numbers. in 1891, Cantor would reprove the same theorems he did 17 years prior using a simple and elegant technique called the Diagonal Argument. Cantor had shown that eventhough both the reals and the naturals go to infinity, it is impossible to find a one-to-one correspondence (or a bijection) between the set of real numbers and the set of natural numbers, simply because there are not enough natural numbers. This effectively shows that the infinity of the real numbers is strictly greater than the infinity of the natural numbers.\newline
+
+\textbf{Final years and Death}
+\newline Cantor's counterintuitive theorems were opposed by many mathematicians, the most vocal of them being his former professor Leopold Kronecker, who attempted to ruin his reputation and discredit his ideas. The backlash surrounding his ideas, mostly aroused by Kronecker, along with failure to secure a post in the University of Berlin, are what caused Cantor's mental health to decline. He started having many mental breakdowns. He was hospitalized and admitted to sanatoriums many times from 1884 until his death. He died from a heart attack in 1918, after living his final years in extreme poverty. 
+
+\newpage
+\section{Preliminaries}
+
+Now we will introduce a few concepts and definitions that we need to understand before we proceed to prove Cantor's most famous theorem. In this section, we will use information from the paper ``\textit{Discrete Mathematics}" by Daoud Siniora \cite{Siniora}. Let us start by defining a set and a subset.
+
+
+\begin{definition}\rm
+A \textit{set} is a collection of objects.\newline\newline An object could be anything: numbers, words and even other sets! In the words of Georg Cantor himself, \textit{a set is a Many which allows itself to be thought of as a One}. Any object in a set belongs to it and is called an element of the set.
+\end{definition}
+
+
+\begin{definition}\rm
+Let $A$ and $B$ be sets. We say that $A$ is a \textit{subset} of $B$, and write $A \subseteq B$ if and only if every element in $A$ is also an element in $B$.
+\end{definition}
+
+We next introduce the notion of a power set.  
+\begin{definition}\rm
+The \textit{power set} $\mathcal{P}(A)$ of a set $A$ is the set of all subsets of $A$.
+\end{definition}
+
+\begin{example}
+Here are some examples of power sets.
+\begin{enumerate}
+    \item $\mathcal{P}(\{\emptyset\})=\{\emptyset,\{\emptyset\}\}$
+    \item $\mathcal{P}(\{\,\emptyset, \{\emptyset\}\,\})=\{\emptyset,\{\emptyset\},\{\{\emptyset\}\},\{\,\emptyset, \{\emptyset\}\,\}\}$\newline
+\end{enumerate}
+\end{example}
+
+\begin{theorem}
+    Let $A$ and $B$ be sets. If $A\subseteq B$, then $\mathcal{P}(A)\subseteq \mathcal{P}(B)$.
+\end{theorem}
+\begin{proof}
+Assume $A\subseteq B$, that is, any element $a_i\in A$ is also in B, hence $a_i\in B$. It follows that $\{a_i\}\subseteq B$, thus $\{a_i\}\in \mathcal{P}(B)$. From there we can deduce that $\{\{a_i\}\}\subseteq \mathcal{P}(B)$. Since $\{\{a_i\}\}=\mathcal{P}(A)$, we can easily conclude that  $\mathcal{P}(A)\subseteq \mathcal{P}(B)$, finishing the proof. 
+\end{proof}
+
+Let us now introduce the concept of a function and some of its properties.
+
+\begin{definition}\rm Let $A$ and $B$ be sets.
+\begin{itemize}
+    \item A \textit{function} $f:A\to B$ from $A$ to $B$ from a set $A$ to a set $B$ is an assignment which assigns for each element $a_i\in A$ exactly one element $b_i\in B$. 
+    
+    \item A function $f:A\to B$ is called \textit{injective} if and only if it assigns for each element $a_i\in A$ a unique element $b_i\in B$, or in other words, $\forall a_1\forall a_2\in A$, $f(a_1)=f(a_2)$ iff $a_1=a_2$. 
+    
+    \item  A function $f:A\to B$ is called \textit{surjective} if and only if it assigns for an element $a_k\in A$ each and every element $b_i\in B$, or in other words, $\forall b_i\in B$, $ \exists a_k\in A $ such that $f(a_k)=b_i$.
+    
+    \item  A function $f:A\to B$ is called \textit{bijective} if and only if it is both injective and surjective.
+\end{itemize}
+\end{definition}
+
+
+For any function $f(a)=b$, $b$ is the image of $a$, and $a$ is the pre-image of $b$.\newline\newline
+Next, we explain how functions are used to compare sizes of sets.
+
+\begin{definition}\rm Let $A$ and $B$ be any sets (finite or infinite).
+\begin{itemize}
+    \item We say that the cardinality of $A$ is equal to the cardinality of $B$, and write $|A|=|B|$, if there exists a bijection from $A$ to $B$.
+    
+    \item We say that the cardinality of $A$ is less than or equal to the cardinality of $B$, and write $|A|\leq |B|$, if there exists an injection from $A$ to $B$.
+    
+    \item We say that the cardinality of $A$ is strictly less than the cardinality of $B$, and write $|A|<|B|$, if there exists an injection but not a bijection from $A$ to $B$}. 
+    
+    \item A set $S$ is \textit{countably infinite} if there exists at least one bijection $f:\mathbb{N}\to S$.
+\end{itemize}
+\end{definition}
+
+
+
+Observe that a countably infinite set is an infinite set for which we can enumerate \textit{all} of its elements in a sequence indexed by the natural numbers. Of course the set of natural numbers itself is a countably infinite set. We will show below another example of a countably infinite set.
+
+\begin{theorem}
+Show that the set $S=\{(m,n)\in \mathbb{Z}^+\times \mathbb{Z}^+\mid m \text{ divides } n\}$ is countably infinite.
+\end{theorem}
+
+\begin{proof}
+One way to show that a set is countably infinite is by describing a way of listing all its elements in a sequence indexed by the natural numbers. Let us start by listing the elements of the set:
+\begin{center}(1,1),(2,2),(3,3),(4,4),(2,4),(5,5),(6,6),(2,6),(3,6),(7,7),(8,8),(2,8),(4,8),(9,9),\newline(3,9),(10,10),(2,10),(5,10),...\end{center} We start with the positive integer 1(by the well-ordering principle), loop over all the positive integers that divide 1 (only 1 in this case), then move to the next positive integer after 1 and repeat the process. This effectively creates a sequence which will include every single element of the desired set, and so will not miss any ordered pair of positive integers if the sequence goes to infinity. All what is left is to index the sequence with the natural numbers, showing that there exists a bijection from the natural numbers to the set S. It follows from Definition 2.7 that the cardinality of the natural numbers is equal to the cardinality of S, and we know that the natural numbers are countably infinite. From here we can easily conclude that set S is countably infinite, finishing the proof.
+\end{proof}
+
+We will now present the main theorem of the article, Cantor's Theorem, which states that it is impossible to have a bijection between any set and its power set.\newline \newline \newline 
+
+
+\section{Cantor's Theorem}
+
+In this section, we will use information from the paper ``\textit{Cantor's Theorem}" by Joe Roussos \cite{Roussos}.
+
+\begin{theorem}[Cantor's Theorem]
+Let $A$ be any (finite or infinite) set. Then $$|A|<|\mathcal{P}(A)|.$$
+\end{theorem}
+\begin{proof}
+
+Let $A$ be any arbitrary set. By definition, to show that $|A|<|\mathcal{P}(A)|$ we need to prove two statements: first, $|A|\leq|\mathcal{P}(A)|$ and second, $|A|\neq|\mathcal{P}(A)|$. In other words, we need to construct an injective function from $A$ to $\mathcal{P}(A)$, and we need to show that it is impossible to have a bijection from $A$ to $\mathcal{P}(A)$.
+
+First, we will show that $|A|\leq |\mathcal{P}(A)|$ by constructing an injective function $g:A\to \mathcal{P}(A)$.
+
+Consider the function $g(a_i)=\{a_i\},a_i\in A$. Since for every $a_1,a_2\in A$, $f(a_1)=f(a_2)$ iff $a_1=a_2$, we can conclude that there exists an  injection from A to its powerset.   
+
+Second, we will prove that $|A|\neq |\mathcal{P}(A)|$, meaning that it is impossible to have a bijection from $A$ to its powerset. For the sake of contradiction, assume that there is a bijection $h:A\to \mathcal{P}(A)$.
+
+Then, by definition of bijectivity, there exists an injection $h:A\to \mathcal{P}(A)$ and surjection $h:A\to \mathcal{P}(A)$. We already proved that there exists an injection from A to its power set. Therefore, assuming that there exists a bijection from A to its power set implies the existence of a surjection from A to its power set. Consider the set $h(a)$ such that $h$ assigns each element $a\in A$ to a set $h(a)\in \mathcal{P}(A) $, such that each set $h(a)\in \mathcal{P}(A) $ has a pre-image. Remember that the image of each element in A is a set, which is itself an element of $\mathcal{P}(A)$.\newline
+
+Consider the set $B=\{a\in A :a\notin h(a) \}$. This set is the set of the elements in $A$ which are not elements in their respective image sets. It follows that $B\subset A$ and $B\in \mathcal{P}(A) $. Since B is an element of $\mathcal{P}(A)$, it must have a preimage, so there must exist an element $x\in A$ such that $h(x)=B$. However, we do not know whether $x$ is an element of $B$ or not. Assume that $x$ is an element of $B$. It follows from the definition of $B$ that $x$ is not in $B$, which is a contradiction. Assume that $x$ is not an element of $B$. It follows from the definition of $B$ that $x$ is inside $B$, which is also a contradiction. Since we chose an arbitrary set $B$ and reached a contradiction, it means that our assumption that there exists a surjection from $A$ to its powerset is wrong. Therefore, we can conclude that there
+there does not exist a bijection from $A$ to its powerset.
+
+Therefore, we have shown that $|A| < |\mathcal{P}(A)|$.
+\end{proof}
+
+\begin{definition}\rm
+A set $S$ is \textit{uncountable} if there does not exist any bijection $f:\mathbb{N}\to S$.
+\end{definition}
+
+
+
+\begin{lemma}
+    Let $S$ be a set. If $|\mathbb{N}|<|S|$, then $S$ is uncountable. 
+\end{lemma}
+Assume that $|\mathbb{N}|<|S|$. Then there exists an injection but not a bijection from $\mathbb{N}$ to $S$, so $S$ is not countably infinite .Also, $S$ is not finite. Since $S$ is neither finite nor countably infinite, we can conclude that $S$ is uncountable. 
+\end{proof}
+
+From Cantor's Theorem and the lemma above we can deduce the following consequences. 
+
+
+\begin{corollary}
+The power set of the natural numbers is uncountable.
+\end{corollary}
+
+\begin{proof}
+We know from Cantor's theorem that $|\mathbb{N}|<|\mathcal{P}(\mathbb{N})|$, and we know from Lemma 3.3 that any set $S$ which has a larger cardinality than the natural numbers is uncountable. Therefore, since $|\mathbb{N}|<|\mathcal{P}(\mathbb{N})|$, we can conclude that the power set of the natural numbers is uncountable, finishing the proof.
+\end{proof}
+
+
+\begin{corollary}
+There are infinitely many infinite sets $S_0, S_1, S_2, S_3, \ldots$ such that for each $i\in \mathbb{N}$ we have that $|S_i|<|S_{i+1}|$ . That is, 
+$$|S_0|<|S_1|<|S_2|<|S_3|< \cdots$$
+In other words, there is an infinite hierarchy of infinities.
+\end{corollary}
+\begin{proof}
+Consider the set of all natural numbers $\mathbb{N}$. This set is an infinite set. Take the power set of $\mathbb{N}$ and you get $\mathcal{P}(\mathbb{N})$, which we know from Cantor's theorem is strictly bigger than $\mathbb{N}$. Therefore, the infinity of $\mathcal{P}(\mathbb{N})$ is strictly bigger than the infinity of $\mathbb{N}$. Consider the power set of the power set of $\mathbb{N}$, which is $\mathcal{P}(\mathcal{P}(\mathbb{N}))$. This set is strictly greater than $\mathcal{P}(\mathbb{N})$, so it has a strictly greater infinity than $\mathcal{P}(\mathbb{N})$. Take the power set of $\mathcal{P}(\mathcal{P}(\mathbb{N}))$ and you get a strictly greater set with a strictly greater infinity, and so on. This implies that we have clearly found an infinite set $S_i$ such that $|S_i|<|S_{i+1}|$ where $i$ here represents the order of the power set of $\mathbb{N}$, finishing the proof.
+
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{Veisdal} 
+Jorgen Veisdal. \textit{The Nature of Infinity - and Beyond}. Medium, 2018.\newline
+\bibitem{Roussos}
+Joe Roussos. \textit{Cantor's Theorem}. 2017.\newline
+\bibitem{Siniora}
+Daoud Siniora. \textit{Discrete Mathematics}. 2023.\newline
+
+\end{thebibliography}
+
+\end{document}
