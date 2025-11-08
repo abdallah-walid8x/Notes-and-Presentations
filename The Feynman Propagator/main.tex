@@ -1,0 +1,242 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb}
+\usepackage{xcolor, tikz}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\graphicspath{ {./images/} }
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\DeclareMathOperator*{\id}{id}
+
+\parindent=0mm
+\parskip=1.9mm
+\linespread{1.1}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\renewcommand{\restriction}{\mathord{\upharpoonright}}
+
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+\title{\textbf{The Feynman Propagator}}
+\author{Abdallah W. Mahmoud \\ ID: 900221058 \\ ~ \\ The American University in Cairo \\ Complex Function Theory}
+\date{Spring 2024}
+
+
+\begin{document}
+\maketitle
+
+\vspace{1cm}
+
+
+\begin{center}\includegraphics[scale=1.4]{diagram}\newline\newline\newline\end{center}
+\begin{center}
+\textit{``The mathematician plays a game in which he himself invents the rules while the physicist plays a game in which the rules are provided by nature, but as time goes on it becomes increasingly evident that the rules which the mathematician finds interesting are the same as those which nature has chosen."}\\
+Paul Dirac
+\end{center}
+\vspace{2cm}
+\textbf{Abstract.}
+
+This paper provides an in-depth explanation of the Feynman propagator. We start by providing the fundamentals of quantum field theory - we introduce a few basic notions, such as Lorentz-invariance from special relativity and Dirac notation from quantum mechanics. Then, we build the propagator from the ground up using important theorems and their consequences from complex analysis. We also explain the physical significance of each step we take in building the propagator. Finally, we explain how the propagator is evaluated, and explain some applications where the propagator is used the most. 
+
+\newpage
+
+\section{Preliminaries}
+
+In this section we will introduce important concepts that we need to understand before deriving the propagator. Recall that a point $s$ in Minkowski spacetime is given by $s=(s_0,s_1,s_2,s_3)$ where the first component $s_0=ct$ is the temporal coordinate, and the other components are spacial, denoted in a single 3-vector \textbf{s}. Notice that we are using natural units, where $c=\hslash =1$. Moreover, the energy-momentum $p$ of any particle in Minkowski spacetime is given by $p=(p_0,p_1,p_2,p_3)$ where the first component $p_0=E/c$ is the energy of the particle, and the rest of the components are the spacial dimensions of momentum, denoted in a single 3-vector \textbf{p}.\newline
+
+The Feynman propagator denoted by $\Delta _F$ can be defined as the vacuum expectation value of the time ordering product of 2 spacetime points x (final point) and y(initial point) in a scalar field $\phi$. 
+\begin{center}$i\Delta _F(x-y)=\langle 0|T[\phi (x)\phi (y)]|0\rangle $\end{center}
+In Quantum Mechanics, an operator is a special matrix that multiplies with the quantum state of a system (encoded in a row vector or column vector), outputting an observable. Anything that can be measured, such as position or angular momentum of the quantum particles, is called an observable. Different operators have different functions, giving different outputs when applied to a quantum state.\newline \newline $T$ in the equation above is the time ordering operator. It is a binary operator which simply places the later spacetime point first. We will see why this operator is important in the next section of this paper. \begin{center}If $x_0>y_0$, then $ T[\phi (x)\phi (y)]=\phi (x)\phi (y)$. If $y_0>x_0$, then $ T[\phi (x)\phi (y)]=\phi (y)\phi (x)$\end{center} The vacuum expectation value of an operator (or the transition amplitude density) is the probability amplitude of a quantum particle to transition between 2 spacetime points in vacuum. The probability amplitude is simply the magnitude squared of a complex number. The bigger the probability amplitude, the greater the probability that the quantum particle propagates between the two spacetime points. The scalar field $\phi$ is a complex function used to describe quantum particles based on their positions in space. The only scalar field which exists as of today is the Higgs field.
+\begin{center}\includegraphics[scale=0.18]{minkowski_metric}\end{center}
+Observe the image above. This is Herman Minkowski, the physicist who formulated the space where special relativity holds. Replace one of the spacial variables in that space with a temporal variable and you end up with the famous Minkowski spacetime. Since we will be manipulating four-vectors a lot in this paper, it is important to note that the magnitude squared of any four-vector $s$ is given by $|s|^2=s\cdot s=s_1^2+s_2^2+s_3^2-s_0^2$ where $s_0$ is the temporal component. The image above shows the magnitude squared of an infinitisemally small vector $ds$. Also, the dot product between any two four-vectors $s$ and $k$ in Minkowski spacetime is given by $s\cdot k= -s_0k_0+s_1k_1+...=-s_0k_0+\sum_{i=1}^{3} s_ik_i$.\newline  
+
+The most significant thing about the four-magnitude and four-product is that they are invariant under the Lorentz transformation. As a consequence of this, we end up with the equations $a=a_0^2-\textbf{a}^2$ (where $a$ is any four vector, $a_0$ the temporal/energy component and \textbf{a} is the spacial/momentum 3-vector) and $k^2=E^2-\textbf{p}^2=m^2$ (where $k$ is an energy-momentum vector, m is the rest mass, E is the energy component $k_0$ and \textbf{p} is the momentum three-vector). We will use these equations in our derivation of the Feynman propagator.
+
+
+\newpage
+\section{Deriving the propagator and its significance}
+In this section we will use some important theorems from complex analysis to derive the Feynman propagator. Note that the Feynman propagator is a relativistic Lorentz-invariant propagator which deals only with virtual particles. Virtual particles are created and annhiliated from interactions between real particles. 
+
+
+
+We start by defining the commutation relation $[\phi(x) \phi(y)]$ between $\phi (x)$ and $\phi(y)$. 
+
+
+\begin{definition}\rm
+The commutation relation between 2 quantities is an equation describing two quantities, one of which is the Fourier transform of another. It is given by $[x^{\pm} p_x^{\mp}]=iI$, where $I$ is the identity operator, $x$ is the position of the particle and $p_x$ is the momentum of the particle in the $x$ direction. 
+\end{definition}
+Replace both the quantities in the equation with two scalar functions each in terms of 2 different spacetime points $x$ and $y$. You end up with the equation $[\phi(x)^{\pm} \phi(y)^{\mp}]=i\Delta _F^{\pm}$.  $\Delta _F$ here is the Feynman Propagator. The point which has a plus sign over it is the final point, and the point which has a minus sign over it is the initial point. We will now build upon this and express the propagator as an integral.
+
+\begin{definition}\rm
+The commutation relation, given by $i\Delta _F^{\pm}$, can also be written as $[\phi(x)^{\pm} \phi(y)^{\mp}]=i\Delta _F^{\pm}=\frac{{\pm}1}{2(2\pi )^3}\int \frac{e^{\mp ik(x-y)}}{\omega _{\textbf{k}}}d^3\textbf{k}$, where $\textbf{k}$ is the momentum 3-vector, $\omega _{\textbf{k}$ is the energy of the particle, and $k$ is the energy-momentum four vector. As you can see, we have two possible cases for the Feynman propagator. We will perform contour integration in each case and observe that both cases yield the same expression.
+\end{definition}
+
+Let us evaluate $i\Delta _F^+$ first. Observe the singularity (or pole) of the function at $k_0=\omega _{\textbf{k}$.
+\begin{center}$i\Delta _F^+=\frac{1}{2(2\pi )^3}\int \frac{e^{-ik(x-y)}}{\omega _{\textbf{k}}}d^3\textbf{k}$\end{center}
+\begin{center}\includegraphics[scale=2]{pos_con}\end{center}
+
+We will use Cauchy's Integral formula here. Let us recall it.
+
+\begin{theorem}
+Suppose that $f$ is analytic in a simply connected domain $D$ and $C$ is any simple closed contour lying entirely within $D$. Then for any point $z_0$ within $C$, $f(z_0)=\frac{1}{2\pi i}\oint_C \frac{f(z)}{z-z_0}dz 
+\end{theorem}
+
+
+All we have to do is rewrite our integral to fit the format of Cauchy's integral. Firstly, since the singularity $k_0=\omega _{\textbf{k}}$ is a value of energy, it must be that $k_0$ is the independent variable (like $z$ in Cauchy's integral). We can then construct an equation analogous to $f(z)$, hence we get $f(\omega _{\textbf{k}})=\frac{1}{2\pi i}\oint_C \frac{f(k_0)}{k_0-\omega _{\textbf{k}}}dk_0$   
+\begin{center}To solve this integral, we choose our $f(\omega _{\textbf{k}})$ to be $f(\omega _{\textbf{k}})=\frac{e^{-i\omega _{\textbf{k}} (x_0-y_0)}}{\omega _{\textbf{k}}+\omega _{\textbf{k}}}$. It follows that $f(k_0)=\frac{e^{k_0(x_0-y_0)}}{k_0+\omega _{\textbf{k}}}$. We then place it in the propagator equation, getting $i\Delta _F^+=\frac{1}{(2\pi )^3}\int e^{-i\textbf{k}(\textbf{x}-\textbf{y})} \frac{e^{i\omega _{\textbf{k}}(x_0-y_0)}}{2\omega _{\textbf{k}}}d^3\textbf{k}$.\end{center}
+
+ The function $f(\omega _{\textbf{k}})$ or $f(k_0)$ was chosen for several reasons. Firstly, the propagator $\Delta _F$ is non relativistic because the integral is evaluated in only 3 dimensions, not four. The Feynman propagator we are deriving is relativistic, so choosing this function makes it easier to change the 3-integral to a 4-integral. Furthermore, this function was chosen such that the exponential can easily be broken down into the 3-vector component and the temporal/energy component, so the equation remains consistent. Also, we chose $f(k_0)$ such that it has the same singularity as the contour integral we are evaluating.
+ \begin{center}$i\Delta _F^+=\frac{1}{2(2\pi )^3}\int \frac{e^{-ik(x-y)}}{\omega _{\textbf{k}}}d^3\textbf{k}=\frac{1}{(2\pi )^3}\int e^{-i\textbf{k}(\textbf{x}-\textbf{y})} \frac{e^{i\omega _{\textbf{k}}(x_0-y_0)}}{2\omega _{\textbf{k}}}d^3\textbf{k}$\end{center}
+ 
+ \begin{center}$=>\frac{1}{(2\pi )^3}\int e^{-i\textbf{k}(\textbf{x}-\textbf{y})} f(\omega _{\textbf{k}})d^3\textbf{k}=\frac{1}{(2\pi )^3}\int e^{-i\textbf{k}(\textbf{x}-\textbf{y})} (\frac{1}{2\pi i}\oint_{C^+} \frac{f(k_0)}{k_0-\omega _{\textbf{k}}}dk_0)d^3\textbf{k}$\end{center}
+ 
+ Notice that the outside integral is a real integral with respect to the momentum 3-vector, which we know is a real quantity. The inside integral is a complex integral with respect to the energy value, which as we can see here can have a real or imaginary value(or both). $C$ here is the contour around the singularity $k_0=\omega _{\textbf{k}}$. We will combine both integrals, taking the limits of the real integral to be from $-\infty$ to $\infty$.   
+ \begin{center}$=>\frac{1}{(2\pi )^3}\int e^{-i\textbf{k}(\textbf{x}-\textbf{y})} (\frac{1}{2\pi i}\oint_{C^+} \frac{e^-ik_0(x_0-y_0)}{(k_0-\omega _{\textbf{k}})(k_0+\omega _{\textbf{k}})}dk_0)d^3\textbf{k}=\frac {-i}{(2\pi )^4} \int_{C^+} \frac {e^{-ik(x-y)}}{(k_0^2)-(\omega _{\textbf{k}}^2)}d^4k$.\end{center}
+ 
+This four-integral imples integration of the 3-momentum over the real 3-dimensional space and integration of the energy in the complex plane over the contour $C$. 
+
+\begin{center}We know that $k^2=k_0^2-\textbf{k}$ and $m^2=\omega _{\textbf{k}}^2-\textbf{k}^2$, so we rewrite the contour integral as $i\Delta _F ^+=\frac {-i}{(2\pi )^4} \int_{C^+} \frac {e^{-ik(x-y)}}{k^2-m^2}d^4k$\end{center}
+
+Next, we evaluate the second case.
+
+\begin{center}\includegraphics[scale=1.5]{neg_con}\end{center}
+
+It is obvious that in order to evaluate this integral, we choose our function to be $f(-\omega _\textbf{k})$, which does not matter because we eventually end up with $(k_0-\omega _\textbf{k})(k_0+\omega _\textbf{k})$ in the denominator. We get $i\Delta _F^-(x-y)=\frac {-i}{(2\pi )^4} \int_{C^-} \frac {e^{-ik(x-y)}}{k^2-m^2}d^4k$
+
+\begin{center}So far, the definition we reached for the Feynman propagator is given below.\end{center}
+
+\begin{definition} The Feynman propagator in momentum-energy space, denoted by $\Delta _F$, is given by $i\Delta _F^{\pm}(x-y)=\frac {-i}{(2\pi )^4} \int_{C^{\pm}} \frac {e^{-ik(x-y)}}{k^2-m^2}d^4k$
+\end{definition}
+
+From quantum mechanics, we can express the probability amplitude of any observable by placing the it between a bra and a ket. Therefore,\begin{center} $i\Delta _F(x-y)=\langle 0|[\phi(x) \phi(y)]|0\rangle$\end{center} 
+
+There is one more operator left, the time ordering operator. We add it to the equation, getting $i\Delta _F(x-y)=\langle 0|T[\phi(x) \phi(y)]|0\rangle$. We place this operator to provide a distinction between $i\Delta _F(x-y)=\langle 0|[\phi(x) \phi(y)]|0\rangle$ and $i\Delta _F(x-y)=\langle 0|[\phi(y) \phi(x)]|0\rangle$. Recall,
+
+\begin{center}If $x_0>y_0$, then $ T\phi (x)\phi (y)=\phi (x)\phi (y)$. If $y_0>x_0$, then $ T\phi (x)\phi (y)=\phi (y)\phi (x)$\end{center}
+
+Based on this, physicists concluded that:
+
+\begin{center}$i\Delta _F(x-y)=\langle 0|[\phi(x) \phi(y)]|0\rangle =>$ creation of a virtual particle at y and destruction at x. \end{center}
+
+\begin{center}$i\Delta _F(x-y)=\langle 0|[\phi(y) \phi(x)]|0\rangle =>$ creation of a virtual anti-particle at x and destruction at y. \end{center}
+
+An antiparticle of some quantum particle has the same mass as the quantum particle but an opposite charge to it. For example, the antiparticle of the electron is the positron. When real quantum particles (like electrons or photons) collide with each other, virtual particles or virtual antiparticles are created and annihilated in very small spacetime intervals. Physicists study interactions between different real quantum particles by studying how virtual particles or virtual antiparticles are created and annhilated. 
+
+\begin{center}\includegraphics[scale=1.5]{ordering2}\end{center}
+
+Since the Feynman Propagator, defined by the 4-integral in energy-momentum space from Definition 2.4, We can also conclude from the image above that a quantum particle moving foward in time is equivalent to its anti-particle counterpart moving backward in time. The time ordering operator ensures both spacetime points x and y are causally connected, preventing the violation of causality. This is shown in more detail in the image below.
+
+\includegraphics[scale=1.3]{causality}
+
+\section{Evaluating the Feynman propagator and its applications}
+
+In this section, we use contour integration yet again to evaluate the Integral and determine the numeric value of the Feynman propagator given two spacetime points $x$ and $y$. To do that, we need to define what a residue is, then state Cauchy's Residue Theorem from complex analysis.
+
+
+
+\begin{definition}
+The coefficient $a_{-1}$ of $\frac{1}{(z − z_0)}$ in the Laurent series given below, \begin{center} $f(z)=\sum_{k=-\infty}^{\infty}a_k(z-z_0)^k=...+\frac{a_{-2}}{(z-z_0)^2}+\frac{a_{-1}}{z-z_0}+a_0+a_1(z-z_0)+...$ \end{center}is called the residue of the function $f$ at the isolated singularity $z_0$. We denote the residue of a function $f(z)$ at a given singularity $a_{-1}=Res(f(z),z_0)$
+\end{definition}
+
+Since $f_k$ has two isolated singularities (at $k_0=\pm \omega _{\textbf{k}}$), we can deduce that $f_k$ has a Laurent series expansion at each singularity. We can then easily deduce the two residues from each Laurent series, which is the only thing we need. Now we state Cauchy's Residue Theorem. Observe how the residues are used in this theorem. 
+
+\begin{theorem}
+Let $D$ be a simply connected domain and $C$ a simple closed contour lying entirely within $D$.If a function $f$ is analytic on and within $C$, except at a finite number of isolated singular points $z_1$, $z_2$, ... , $z_n$ within $C$, then $\oint_Cf(z)dz=2\pi i\sum_{k=1}^nRes(f(z),z_k)$ 
+\end{theorem}
+
+Cauchy's Residue Theorem is essentially a generalisation of all the limited integral theorems that preceded it, such as Cauchy-Goursat theorem, Cauchy's integral formula, Cauchy's path independence theorem and more. All these theorems are encoded inside Cauchy's Residue Theorem.  
+
+\begin{center}\includegraphics[scale=1.5]{residuetheorem}\end{center}
+Also, we need an important result from quantum mechanics. We already stated it in the beginning of the paper, but this time we state it in terms of the contour integrals we derived.
+\begin{center}$i\Delta _F(x-y)=\langle 0|T[\phi (x)\phi (y)]|0\rangle = \langle 0|\phi (x)\phi (y)|0\rangle = i\Delta_F^+(x-y)$ if $x_0>y_0$\end{center}
+\begin{center}$i\Delta _F(x-y)=\langle 0|T[\phi (x)\phi (y)]|0\rangle = \langle 0|\phi (y)\phi (x)|0\rangle = -i\Delta_F^-(x-y)$ if $y_0>x_0$\end{center}
+
+This implies that the version of the propagator we use depends on which time component from the two spacetime points is earlier. Also, since the propagator is a four-integral, we can split the integral into a straight line integral over the real axis added to a contour integral over the complex plane. Physicists use this strategy to simplify the integral and evaluate it with less difficulty.
+
+\includegraphics[scale=1.5]{feynman_contour}
+
+Another benefit of this strategy is that we avoid integrating over both singularities of the integrand, which would otherwise be included in the integral. Recall that the integral we got from the commutation relation in Definition 2.2 has its boundaries all over the real space (since they are not defined in the integral). Finally, using contours to avoid the singularities enable us to integrate over the fourth dimension energy. This is where the beauty of the four-integral shines. We use the four-integral to integrate over an extra dimension (the energy dimension, or fourth dimension) to avoid having the singularities in the integrand. Otherwise, the four-integral we derived would have been useless.\newline
+
+Before we evaluate the the integral, we close the contour in order to use Cauchy's Residue Theorem. If $x_0>y_0$, we close the contour from the lower side in order to have the positive singularity within the contour (since $i\Delta _F(x-y)=
+i\Delta_F^+(x-y)$ if $x_0>y_0$). Similarly, if  $y_0>x_0$, we close the contour from the upper side in order to have the negative singularity within the contour (since $i\Delta _F(x-y)=
+-i\Delta_F^-(x-y)$ if $y_0>x_0$). In the case where we close the contour from the lower side(when $x_0>y_0$), we add an extra minus sign since the orientation of the resultant contour would be opposite to the orientation of the contour we chose when deriving the propagator. This is very convenient because we can can form a generalised equation for the Feynman propagator $\Delta _F(x-y)=\frac {1}{(2\pi )^4} \int_{K}} \frac {e^{-ik(x-y)}}{k^2-m^2}d^4k$. The two $\Delta _F^{\pm}(x-y)$ equations before required that we change the integrand, keeping the orientation of the contour unchanged, depending on whether $x_0>y_0$ or $y_0>x_0$. The main benefit of the new generalised equation is that the integrand remains unchanged regardless of whether $x_0>y_0$ or $y_0>x_0$, and it is the orientation of the contour that would change depending on whether $x_0>y_0$ or $y_0>x_0$. Don't forget that this is a four-integral, meaning that after we perform integration in the complex plane along a contour, we also need to integrate over real three-dimensional space. We achieve this by simply integrating over a straight line in the complex plane that runs exclusively on the real axis, and that would be equivalent to real three-dimensional integration.      
+
+\begin{center}\includegraphics[scale=1]{causality_contours}\end{center}
+
+Before we evaluate the integral, we state another important theorem from complex analysis, usually referred to as the $ML$ inequality.
+
+\begin{theorem}
+
+If $f$ is continuous on a smooth curve $C$ and if $|f(z)| \le M$ for all $z$ on $C$, then $|\int_Cf(z)dz|\le ML$, where $L$ is the length of $C$.
+\end{theorem}
+
+Now we split the big contour into smaller lines, and evaluate the contour along each line. Since the contour would have only one singularity inside, we use Cauchy's residue theorem to conclude that \begin{center}$\int_{L_1}f_kd^4k+\int_{C_1}f_kd^4k+\int_{L_2}f_kd^4k+\int_{C_2}f_kd^4k+\int_{L_3}f_kd^4k+\int_{C_3}f_kd^4k=2\pi iRes(f_k,\pm \omega_{\textbf{k}})$\end{center}
+
+Note that $f_k=\frac {e^{-ik(x-y)}}{(2\pi)^4(k^2-m^2)}$. Note that the if we make $L_1$ run to $-\infty$ and $L_2$ run to $+\infty$, then the integral along $L_1$,$C_1$,$L_2$,$C_2$ and $L_3$ would be the Feynman Propagator. We name this piecewise contour $L_P$.
+\begin{center}$\int_{L_1}f_kd^4k+\int_{C_1}f_kd^4k+\int_{L_2}f_kd^4k+\int_{C_2}f_kd^4k+\int_{L_3}f_kd^4k=\int_{L_P}f_kd^4k$\end{center}
+
+We then make the piecewise contour $L_P$ run from $-\infty$ to $L_2$ along the real axis.
+\begin{center}$lim_{L_P\rightarrow \infty}\int_{L_P}f_kd^4k=\Delta_F(x-y)$\end{center}
+
+If $L_P$ runs to infinity from both sides, then the radius $R$ of the semicircular contour $C_3$ would also run to infinity. We can then rewrite the limit $lim_{L_P\rightarrow \infty}\int_{L_P}f_kd^4k=\Delta_F(x-y)$ in terms of $R$, getting $lim_{R\rightarrow \infty}\int_{L_P}f_kd^4k=\Delta_F(x-y)$ We know from Cauchy's residue theorem, that 
+\begin{center}$\int_{L_P}f_kd^4k+\int_{C_3}=lim_{R\rightarrow \infty}\int_{L_P}f_kd^4k+lim_{R\rightarrow \infty}\int_{C_3}f_kd^4k$.\end{center}
+
+This is because the number and location of the singularity does not change as $R$ approaches infinity. It follows that \begin{center}$lim_{R\rightarrow \infty}\int_{L_P}f_kd^4k+lim_{R\rightarrow \infty}\int_{C_3}f_kd^4k=2\pi iRes(f_k,\pm \omega_{\textbf{k}})$\end{center}
+We use the ML inequality to deduce that $|\int_{C_3}f_kd^4k|\le \frac{\pi R}{(2\pi)^4(\textbf{k}^2-m^2)}$. As R goes to infinity, the bounds of the integral increase and go to infinity, so $k$ also goes to infinity. Therefore, we get $lim_{R\rightarrow \infty}|\int_{C_3}f_kd^4k|\le \infty \cdot 0$. 
+\begin{center}$\frac{1}{\textbf{k}^2-m^2}$ goes to zero faster than $R$ goes to infinity, so the zero overtakes the infinity in the inequality. Finally, we end up with $lim_{R \rightarrow \infty}|\int_{C_3}f_kd^4k|= 0$\end{center}
+
+We are then left with $lim_{R\rightarrow \infty}\int_{L_P}f_kd^4k=\Delta_F(x-y)=2\pi iRes(f_k,\pm \omega_{\textbf{k}})$. The Feynman integral is now very easy to evaluate as long as the singular points are known. Another way to evaluate the integral without performing contour integration is to shift the singular points an infinitesimal vertical distance such that they are no longer on the real axis without changing too much the numeric value of the integral.
+\begin{center}\includegraphics[scale=1.5]{epsilon}\end{center}
+ 
+This way, we can evaluate the integral on a single line instead of evaluating it over a complicated piecewise contour, taking the limits of the integral as $\eta$ approaces zero. Remember that $\eta$ is an infinitesimally small number.
+
+\begin{center}We know that $k^2-m^2=(k_0)^2-(\omega_{\textbf{k}})^2$. Examine the expression on the left hand side of the equation. In order to shift the singularities away from the real axis, we rewrite this expression as $(k_0)^2-(\omega_{\textbf{k}}-i\eta)^2$. This expression expands into $k_0^2-\omega_{\textbf{k}}^2+\eta ^2+2i\omega_{\textbf{k}}\eta$. We define another infinitesimal quantity $\epsilon=2\omega_{\textbf{k}}\eta$ and ignore $\eta$^2$ since it is too small and negligible. We end up with $k^2-m^2=(k_0)^2-(\omega_{\textbf{k}})^2+i\epsilon$, and we substitute this expression in the denominator of the contour integral. We evaluate the integral normally then take the limit as $\epsilon$ reaches zero. We are now ready to define the final form of the Feynman propagator.\end{center}
+
+\begin{definition}The Feynman propagator can be expressed as the limit of a real integral $\Delta_F(x-y)=\lim_{\epsilon \rightarrow 0}\frac{1}{(2\pi)^4}\int_{-\infty}^{\infty}\frac{e^{-ik(x-y)}}{k^2-m^2+i\epsilon}d^4k$
+\end{definition}
+
+\begin{flushleft}This integral describes the probability of a virtual particle propagating from $x$ to $y$ and the probability of a virtual anti-particle propagating from $y$ to $x$. An important field where $\Delta_F(x-y)$ is used extensively is in interaction theory, the study of fundamental reactions that cannot be reduced into simpler reaction. Interaction theory describes interactions between real particles in terms of virtual particles. Different interactions between real particles lead to virtual particles (or anti-particles) propagating in different spacetime intervals. One specific spacetime intervals is input to the propagator, and the 4-integral is evaluated. The calculated value represents the probability of a specific transition of virtual particles across the input interval, and hence represents the probability of a particular interaction happening between specific real particles. In other words, the propagator is used to calculate the scattering amplitude (the probability of an interaction to occur. ) of a particular collision between a specific number and type of real particles. \end{flushleft} 
+
+\begin{center}\includegraphics[scale=1.2]{interaction}\newline\end{center}
+
+
+
+\section{Conclusion}
+
+\begin{flushleft}We have reached the end of the paper. To sum up, we derived the propagator, showed how to evaluate it, and then finally explained how it is used. Throughout the paper, the theorems of complex analysis were the catalysts that enabled us to take huge leaps quickly and effortlessly in the derivation and evaluation of the propagator. Without these theorems, deriving the propagator would be an extremely slow and tedious process. It is apparent that the the identity of the Feynman propagator - and much of quantum field theory too - is heavily reliant on the beauty, elegance and robustness of mathematics. The more we understand this, the more we can understand why Paul Dirac, an English theoretical physicist, said what he said in the second page of this paper.\end{flushleft}
+
+\begin{thebibliography}{9}
+
+\bibitem{Klauber} 
+Robert D. Klauber. \textit{Derivation of the Feynman Propagator}. Chapter 3 of Student Guide to Quantum Field Theory, 2010.
+
+\bibitem{Weinzierl} 
+Stefan Weinzierl. \textit{Feynman Integrals Lecture 1}. Higgs Centre School for Theoretical Physics, 2021
+
+\bibitem{Avgoustidis} 
+Tasos Avgoustidis. \textit{Lecture 4: 
+Free Fields - Causality, Feynman 
+Propagator, Complex Scalar}. 
+
+\bibitem{Contour integral of Feynman propagator} 
+\textit{Contour integral of Feynman propagator}. 2020
+
+\bibitem{Nolte} 
+David D. Nolte. \textit{Hermann Minkowski’s Spacetime: The Theory that Einstein Overlooked}. Galilieo unbound blog, 2021.
+
+\bibitem{Zill} 
+Dennis G. Zill, Patrick D. Shanahan.\textit{A first Course in Complex Analysis with Applications}. Jones and Bartlett 
+ Publishers Inc. 2003.
+
+\end{thebibliography}
+
+\end{document}
